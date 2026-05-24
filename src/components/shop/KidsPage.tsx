@@ -166,25 +166,28 @@ export default function KidsPage() {
           {filteredProducts.map((product) => (
             <div 
               key={product.id} 
-              className="bg-white rounded-xl md:rounded-3xl p-3 md:p-4 border border-sky-50 hover:shadow-2xl transition-all duration-500 flex flex-col group relative"
+              className="bg-white rounded-xl md:rounded-3xl p-3 md:p-4 border border-sky-50 transition-all duration-500 flex flex-col"
             >
-              {/* Image box */}
-              <div className="aspect-[4/5] bg-sky-50/40 rounded-xl md:rounded-2xl p-4 md:p-6 mb-4 md:mb-6 flex items-center justify-center relative overflow-hidden group">
+              {/* Image box - removed group hover effects */}
+              <div className="aspect-[4/5] bg-sky-50/40 rounded-xl md:rounded-2xl p-4 md:p-6 mb-4 md:mb-6 flex items-center justify-center relative overflow-hidden">
                 {product.isNew && (
                   <span className="absolute top-2 md:top-4 left-2 md:left-4 text-[6px] md:text-[8px] font-black uppercase tracking-[0.2em] bg-yellow-400 text-black px-1.5 md:px-3 py-0.5 md:py-1 rounded-full z-10">
                     Fun Colorway
                   </span>
                 )}
                 
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-auto object-contain transform group-hover:scale-110 group-hover:rotate-6 md:group-hover:rotate-12 transition-all duration-750 drop-shadow-lg"
-                  referrerPolicy="no-referrer"
-                />
+                {/* Make the image clickable */}
+                <Link to={`/product/${product.id}`} className="w-full h-full flex items-center justify-center">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-auto object-contain transition-all duration-700 drop-shadow-lg md:group-hover:scale-110 md:group-hover:rotate-12"
+                    referrerPolicy="no-referrer"
+                  />
+                </Link>
 
-                {/* Quick actions overlay - hidden on mobile, visible on hover for desktop */}
-                <div className="hidden md:flex absolute inset-x-0 bottom-4 px-4 justify-center space-x-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                {/* Quick actions overlay - only visible on desktop hover */}
+                <div className="hidden md:flex absolute inset-x-0 bottom-4 px-4 justify-center space-x-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
                   <Link 
                     to={`/product/${product.id}`}
                     className="p-3 bg-white hover:bg-black hover:text-white rounded-full shadow-lg text-black transition-colors"
@@ -199,10 +202,10 @@ export default function KidsPage() {
                   </button>
                 </div>
 
-                {/* Mobile quick add button */}
+                {/* Mobile quick add button - always visible on mobile */}
                 <button 
                   onClick={() => addToCart({ ...product, quantity: 1, size: '4Y' })}
-                  className="md:hidden absolute bottom-2 left-2 right-2 bg-black text-white py-1.5 rounded-lg text-[8px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="md:hidden absolute bottom-2 left-2 right-2 bg-black text-white py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider"
                 >
                   Quick Add
                 </button>
@@ -210,21 +213,23 @@ export default function KidsPage() {
 
               {/* Shoe Info */}
               <div className="flex-1 flex flex-col justify-between px-0 md:px-2">
-                <div>
-                  <div className="flex items-center justify-between mb-1 flex-wrap gap-1">
-                    <span className="text-[7px] md:text-[9px] font-bold text-sky-500 uppercase tracking-widest">{product.category}</span>
-                    <div className="flex items-center text-yellow-400">
-                      <Star className="h-2 w-2 md:h-3 md:w-3 fill-current" />
-                      <span className="text-[8px] md:text-[10px] font-bold text-black ml-0.5 md:ml-1">4.9</span>
+                <Link to={`/product/${product.id}`} className="block">
+                  <div>
+                    <div className="flex items-center justify-between mb-1 flex-wrap gap-1">
+                      <span className="text-[7px] md:text-[9px] font-bold text-sky-500 uppercase tracking-widest">{product.category}</span>
+                      <div className="flex items-center text-yellow-400">
+                        <Star className="h-2 w-2 md:h-3 md:w-3 fill-current" />
+                        <span className="text-[8px] md:text-[10px] font-bold text-black ml-0.5 md:ml-1">4.9</span>
+                      </div>
                     </div>
+                    <h3 className="text-[11px] md:text-sm font-black text-black tracking-tight md:group-hover:text-sky-500 transition-colors line-clamp-2">
+                      {product.name}
+                    </h3>
+                    <p className="text-[7px] md:text-[10px] text-gray-400 mt-0.5 md:mt-1 uppercase tracking-wider">
+                      {product.colors || 4} Kid friendly colors
+                    </p>
                   </div>
-                  <h3 className="text-[11px] md:text-sm font-black text-black tracking-tight group-hover:text-sky-500 transition-colors line-clamp-2">
-                    {product.name}
-                  </h3>
-                  <p className="text-[7px] md:text-[10px] text-gray-400 mt-0.5 md:mt-1 uppercase tracking-wider">
-                    {product.colors || 4} Kid friendly colors
-                  </p>
-                </div>
+                </Link>
 
                 <div className="flex items-center justify-between mt-3 md:mt-4 pt-3 md:pt-4 border-t border-gray-50">
                   <span className="text-base md:text-lg font-black text-black">${product.price}</span>
