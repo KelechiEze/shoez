@@ -8,7 +8,24 @@ import { useState } from 'react';
 
 export default function TopPicks() {
   const { addToCart } = useCart();
-  const { favorites, toggleFavorite } = useFavorites();
+  
+  // Safely handle favorites context with error boundary
+  let favorites: string[] = [];
+  let toggleFavorite: (productId: string) => void = () => {};
+  let favoritesError = false;
+  
+  try {
+    const favoritesContext = useFavorites();
+    favorites = favoritesContext.favorites;
+    toggleFavorite = favoritesContext.toggleFavorite;
+  } catch (error) {
+    console.warn('Favorites context not available in TopPicks:', error);
+    favoritesError = true;
+    // Provide fall empty implementations
+    favorites = [];
+    toggleFavorite = () => {};
+  }
+  
   const [addedProductId, setAddedProductId] = useState<string | null>(null);
 
   const handleQuickAdd = (product: any, e: React.MouseEvent) => {
@@ -20,7 +37,9 @@ export default function TopPicks() {
 
   const handleToggleFavorite = (productId: string, e: React.MouseEvent) => {
     e.preventDefault();
-    toggleFavorite(productId);
+    if (!favoritesError) {
+      toggleFavorite(productId);
+    }
   };
 
   return (
@@ -65,13 +84,15 @@ export default function TopPicks() {
                   </span>
                 )}
 
-                {/* Favorite Button */}
-                <button 
-                  onClick={(e) => handleToggleFavorite(product.id, e)}
-                  className="absolute top-2 md:top-3 right-2 md:right-3 p-1.5 md:p-2 rounded-full bg-white/50 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity z-10"
-                >
-                  <Heart className={`h-3 w-3 md:h-3.5 md:w-3.5 transition-colors ${favorites.includes(product.id) ? 'fill-red-500 text-red-500' : 'text-gray-400 hover:text-red-500'}`} />
-                </button>
+                {/* Favorite Button - Only show if favorites context is available */}
+                {!favoritesError && (
+                  <button 
+                    onClick={(e) => handleToggleFavorite(product.id, e)}
+                    className="absolute top-2 md:top-3 right-2 md:right-3 p-1.5 md:p-2 rounded-full bg-white/50 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity z-10"
+                  >
+                    <Heart className={`h-3 w-3 md:h-3.5 md:w-3.5 transition-colors ${favorites.includes(product.id) ? 'fill-red-500 text-red-500' : 'text-gray-400 hover:text-red-500'}`} />
+                  </button>
+                )}
                 
                 <img
                   src={product.image}
