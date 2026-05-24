@@ -96,9 +96,9 @@ export default function Hero() {
     animateSlide(index, index > current ? 1 : -1);
   };
 
-  // Auto-slide every 2 seconds
+  // Auto-slide every 5 seconds (increased for better UX)
   useEffect(() => {
-    const timer = setInterval(nextSlide, 2000);
+    const timer = setInterval(nextSlide, 5000);
     return () => clearInterval(timer);
   }, [current, isAnimating]);
 
@@ -163,10 +163,10 @@ export default function Hero() {
                 {slide.description}
               </p>
               <Link
-                to={`/product/${slide.id}`}
+                to="/shop"
                 className="inline-flex items-center space-x-4 bg-black text-white px-10 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:scale-105 active:scale-95 transition-all"
               >
-                <span>Explore Now</span>
+                <span>Shop Now</span>
                 <ChevronRight className="h-4 w-4" />
               </Link>
             </div>
@@ -248,5 +248,5 @@ export default function Hero() {
         </button>
       </div>
     </section>
-  );
+  ); 
 }

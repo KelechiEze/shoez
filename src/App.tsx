@@ -6,6 +6,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { CartProvider } from './context/CartContext';
+import { FavoritesProvider } from './context/FavoritesContext';
 import Header from './components/common/Header';
 import TrendingVideo from './components/home/Trendingvideo';
 import Footer from './components/common/Footer';
@@ -42,21 +43,23 @@ function HomePage() {
 export default function App() {
   return (
     <CartProvider>
-      <Router>
-        <ScrollToTop />
-        <div className="min-h-screen bg-white font-sans text-black selection:bg-yellow-200">
-          <Header />
-          <main>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/shop" element={<ShopPage />} />
-              <Route path="/product/:id" element={<ProductDetails />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </Router>
+      <FavoritesProvider>
+        <Router>
+          <ScrollToTop />
+          <div className="min-h-screen bg-white font-sans text-black selection:bg-yellow-200">
+            <Header />
+            <main>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/shop" element={<ShopPage />} />
+                <Route path="/product/:id" element={<ProductDetails />} />
+                <Route path="/checkout" element={<CheckoutPage />} />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
+        </Router>
+      </FavoritesProvider>
     </CartProvider>
   );
 }
