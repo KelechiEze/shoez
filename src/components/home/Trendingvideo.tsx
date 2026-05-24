@@ -28,13 +28,12 @@ export default function TrendingVideo() {
         <div className="relative aspect-[21/9] w-full overflow-hidden group rounded-3xl">
           <video
             ref={video1Ref}
-            src="/IMG_3103.mp4"
+            src="/det1.mp4"
             className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
             autoPlay
             loop
             muted
             playsInline
-            poster="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2000&auto=format&fit=crop"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex flex-col justify-center px-12 md:px-24">
             <span className="text-[11px] font-bold text-white/70 uppercase tracking-[0.3em] mb-4">
@@ -58,13 +57,12 @@ export default function TrendingVideo() {
         <div className="relative aspect-square overflow-hidden group">
           <video
             ref={video2Ref}
-            src="/IMG_3102.mp4"
+            src="/det2.mp4"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             autoPlay
             loop
             muted
             playsInline
-            poster="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=1200&auto=format&fit=crop"
           />
           <div className="absolute bottom-10 left-10">
              <p className="text-white text-lg font-bold leading-tight drop-shadow-lg">
@@ -75,13 +73,12 @@ export default function TrendingVideo() {
         <div className="relative aspect-square overflow-hidden group">
           <video
             ref={video3Ref}
-            src="/IMG_3101.mp4"
+            src="/det3.mp4"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             autoPlay
             loop
             muted
             playsInline
-            poster="https://images.unsplash.com/photo-1514989940723-e8e51635b782?q=80&w=1200&auto=format&fit=crop"
           />
           <div className="absolute bottom-10 left-10">
              <p className="text-white text-lg font-bold leading-tight drop-shadow-lg">
@@ -117,13 +114,12 @@ export default function TrendingVideo() {
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              src="https://videos.pexels.com/video-files/3195399/3195399-uhd_2560_1440_30fps.mp4"
+              src="/det4.mp4"
               className="w-full h-auto drop-shadow-2xl rounded-2xl"
               autoPlay
               loop
               muted
               playsInline
-              poster="/IMG_3100.JPG.jpeg"
             />
          </div>
       </div>

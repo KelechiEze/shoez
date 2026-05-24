@@ -1,27 +1,40 @@
 import { motion } from 'motion/react';
+import { useRef, useEffect } from 'react';
 
 const VIDEO_ITEMS = [
   {
     id: 1,
     title: "Performance Excellence",
     subtitle: "Built for speed and comfort",
-    videoUrl: "/huji.mp4",
+    videoUrl: "/det2.mp4",
   },
   {
     id: 2,
     title: "Street Style",
     subtitle: "Legacy meets modern design",
-    videoUrl: "/IMG_3102.mp4",
+    videoUrl: "/det1.mp4",
   },
   {
     id: 3,
     title: "Dynamic Moves",
     subtitle: "Unmatched traction and support",
-    videoUrl: "/IMG_3102.mp4",
+    videoUrl: "/det4.mp4",
   }
 ];
 
 export default function VideoFeature() {
+  // Create refs for each video
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  useEffect(() => {
+    // Play all videos when component mounts
+    videoRefs.current.forEach(video => {
+      if (video) {
+        video.play().catch(e => console.log("Video play failed:", e));
+      }
+    });
+  }, []);
+
   return (
     <section className="py-24 px-4 sm:px-8 lg:px-12 max-w-[1440px] mx-auto overflow-hidden">
       <div className="flex flex-col md:flex-row gap-6">
@@ -35,6 +48,7 @@ export default function VideoFeature() {
             className="flex-1 group relative aspect-[2/1] bg-black rounded-[4px] overflow-hidden"
           >
             <video
+              ref={el => videoRefs.current[index] = el}
               autoPlay
               loop
               muted
