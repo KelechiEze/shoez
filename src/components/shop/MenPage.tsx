@@ -1,38 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ALL_PRODUCTS } from '../../constants';
+import { MEN_PRODUCTS } from '../../constants';
 import { useCart } from '../../context/CartContext';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
-import { Heart, SlidersHorizontal, Eye, ShoppingCart, Star } from 'lucide-react';
+import { SlidersHorizontal, Eye, ShoppingCart, Star } from 'lucide-react';
 
 export default function MenPage() {
   const { addToCart } = useCart();
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
   
   const headerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const filterRef = useRef<HTMLDivElement>(null);
 
-  // Filter products that contain "Men", "Racing", "Running", "Retro", "Skate", "Training", "Basketball", "Lifestyle"
-  // Let's filter products representing Men's selection
-  const menProducts = ALL_PRODUCTS.filter((p) => {
-    const nameLower = p.name.toLowerCase();
-    const catLower = p.category.toLowerCase();
-    const isExcluded = nameLower.includes('women') || catLower.includes('women') || catLower.includes('kids');
-    return !isExcluded;
-  });
-
   const categories = ['All', 'Running', 'Lifestyle', 'Basketball', 'Training'];
 
-  const filteredProducts = menProducts.filter((product) => {
+  const filteredProducts = MEN_PRODUCTS.filter((product) => {
     if (selectedCategory === 'All') return true;
     return product.category.toLowerCase().includes(selectedCategory.toLowerCase()) || 
            product.name.toLowerCase().includes(selectedCategory.toLowerCase());
   });
 
   useEffect(() => {
-    // Elegant entrance animation
     const tl = gsap.timeline();
     
     tl.fromTo(headerRef.current, 
@@ -91,7 +80,7 @@ export default function MenPage() {
                 Shop Collection
               </a>
               <span className="border border-white/20 px-6 md:px-8 py-2.5 md:py-3.5 text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-full text-white backdrop-blur-md text-center">
-                15+ Products
+                {MEN_PRODUCTS.length}+ Products
               </span>
             </div>
           </div>

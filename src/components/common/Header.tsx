@@ -13,8 +13,8 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { label: 'Man', path: '/men' },
-    { label: 'Woman', path: '/women' },
+    { label: 'Men', path: '/men' },
+    { label: 'Women', path: '/women' },
     { label: 'Kids', path: '/kids' },
     { label: 'Collections', path: '/collections' },
     { label: 'Contact', path: '/contact' }

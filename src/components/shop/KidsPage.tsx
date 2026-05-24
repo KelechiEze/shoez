@@ -1,52 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ALL_PRODUCTS } from '../../constants';
+import { KIDS_PRODUCTS } from '../../constants';
 import { useCart } from '../../context/CartContext';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { SlidersHorizontal, Eye, ShoppingCart, Star, Sparkles } from 'lucide-react';
-
-const KIDS_PRODUCTS = [
-  {
-    id: 'k-1',
-    name: 'Nike Air Max Bolt Junior',
-    category: "Kids' Road Running",
-    price: 85,
-    image: 'https://images.unsplash.com/photo-1542291026-7eec26427ff?q=80&w=800&auto=format&fit=crop',
-    colors: 2,
-    description: 'Fast looks, super plush. The Air Max Bolt is all about high performance cushioning for active feet.',
-    isNew: true
-  },
-  {
-    id: 'k-2',
-    name: 'Nike Team Hustle Quick 3',
-    category: "Kids' Basketball",
-    price: 65,
-    image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=800&auto=format&fit=crop',
-    colors: 3,
-    description: 'Playground to hardwood. Features deep flex grooves and padded collar support for rapid pivots.',
-    isNew: false
-  },
-  {
-    id: 'k-3',
-    name: 'Nike Waffle One SE Youth',
-    category: "Kids' Lifestyle",
-    price: 75,
-    image: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=800&auto=format&fit=crop',
-    colors: 4,
-    description: 'Throwback waffle sole, modern day durability. Transparent mesh inserts keep feet fresh.',
-    isNew: true
-  },
-  {
-    id: 'k-4',
-    name: 'Nike Star Runner 3 Flyease',
-    category: "Kids' Running",
-    price: 55,
-    image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop',
-    colors: 2,
-    description: 'Zero laces. Instant on. Upgraded Flyease tech lets kids strap in and speed away securely.',
-    isNew: false
-  }
-];
 
 export default function KidsPage() {
   const { addToCart } = useCart();

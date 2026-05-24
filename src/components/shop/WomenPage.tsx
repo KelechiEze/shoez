@@ -1,52 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ALL_PRODUCTS } from '../../constants';
+import { WOMEN_PRODUCTS } from '../../constants';
 import { useCart } from '../../context/CartContext';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
-import { SlidersHorizontal, Eye, ShoppingCart, Heart, Star } from 'lucide-react';
-
-const WOMEN_SPECIFIC_PRODUCTS = [
-  {
-    id: 'w-1',
-    name: 'Nike Air Max Veritas Platform',
-    category: "Women's Lifestyle",
-    price: 165,
-    image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop',
-    colors: 3,
-    description: 'Chic stacked midsole meets Max Air comfort. Designed for bold, statement style on the city streets.',
-    isNew: true
-  },
-  {
-    id: 'w-2',
-    name: 'Nike React Pegasus Trail Rose',
-    category: "Women's Trail Running",
-    price: 145,
-    image: 'https://images.unsplash.com/photo-1582588673323-28956488d011?q=80&w=800&auto=format&fit=crop',
-    colors: 2,
-    description: 'Highly responsive react cushion in subtle pastel lavender & soft pink accents. Perfect for off-grid runs.',
-    isNew: false
-  },
-  {
-    id: 'w-3',
-    name: 'Nike TC 7900 Premium Cream',
-    category: "Women's Shoe",
-    price: 135,
-    image: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?q=80&w=800&auto=format&fit=crop',
-    colors: 2,
-    description: 'Heavy duty retro styling coupled with ultimate comfort. Your default high-end choice.',
-    isNew: true
-  },
-  {
-    id: 'w-4',
-    name: 'Nike Court Vision Alta',
-    category: "Women's Lifestyle",
-    price: 95,
-    image: 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=800&auto=format&fit=crop',
-    colors: 4,
-    description: 'Genuine leather, uplifted style. Refined platform profile that commands attention.',
-    isNew: false
-  }
-];
+import { SlidersHorizontal, Eye, ShoppingCart, Star } from 'lucide-react';
 
 export default function WomenPage() {
   const { addToCart } = useCart();
@@ -56,12 +13,9 @@ export default function WomenPage() {
   const gridRef = useRef<HTMLDivElement>(null);
   const filterRef = useRef<HTMLDivElement>(null);
 
-  // Combine original list with dedicated women's list for a richer experience
-  const displayProducts = [...WOMEN_SPECIFIC_PRODUCTS, ...ALL_PRODUCTS.slice(4, 9)];
-
   const categories = ['All', 'Lifestyle', 'Running', 'Vintage'];
 
-  const filteredProducts = displayProducts.filter((product) => {
+  const filteredProducts = WOMEN_PRODUCTS.filter((product) => {
     if (selectedCategory === 'All') return true;
     return product.category.toLowerCase().includes(selectedCategory.toLowerCase()) || 
            product.name.toLowerCase().includes(selectedCategory.toLowerCase());
@@ -126,7 +80,7 @@ export default function WomenPage() {
                 Explore Now
               </a>
               <span className="border border-white/20 px-6 md:px-8 py-2.5 md:py-3.5 text-[10px] md:text-xs font-bold uppercase tracking-widest rounded-full text-white backdrop-blur-md text-center">
-                Chic Series
+                {WOMEN_PRODUCTS.length}+ Products
               </span>
             </div>
           </div>
